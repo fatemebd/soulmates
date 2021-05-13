@@ -98,9 +98,24 @@ class Circular_linked_list{
 
   void pop(int data);
 
-  void push_after(int new_data,int pa_data);
+  void push_after(int new_data,int pa_data)
+  {
+      node * tmp=find( pa_data);
+      node * tp=current;
+      current=tmp;
+      push(new_data);
+      current=tp;
 
-  void push_befor(int new_data,int pb_data);
+  }
+
+  void push_befor(int new_data,int pb_data)
+  {
+      node * tmp=find( pb_data);
+      node * tp=current;
+      current=tmp->get_prev();
+      push(new_data);
+      current=tp;
+  }
 
   void print()
   {
@@ -121,7 +136,16 @@ class Circular_linked_list{
       }
   }
 
+node * find(int data)
+{
+    node * tmp=current;
+    while (tmp->get_data()!=data)
+    {
+       tmp=tmp->get_next();
 
+    }
+    return tmp;
+}
 
 
 
@@ -143,12 +167,16 @@ int main(){
 
 Circular_linked_list c;
 c.push(7);
-c.push(6);
 c.push(5);
-c.push(4);
-c.push(3);
-c.push(2);
-c.push(1);
+c.push_befor(6,5);
+c.push_after(4,5);
+c.push(0);
+
+//c.push(5);
+//c.push(4);
+//c.push(3);
+//c.push(2);
+//c.push(1);
 c.print();
 
 
