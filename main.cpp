@@ -86,14 +86,14 @@ public:
     }
 
     void pop()
-        {
-           node * q = this->current ;
-           q->get_prev()->set_next( q->get_next() ) ;
-           q->get_next()->set_prev( q->get_prev() ) ;
-           current = current->get_next() ;
-           delete q ;
-           size -- ;
-        }
+    {
+        node * q = this->current ;
+        q->get_prev()->set_next( q->get_next() ) ;
+        q->get_next()->set_prev( q->get_prev() ) ;
+        current = current->get_next() ;
+        delete q ;
+        size -- ;
+    }
 
     void pop(int data){
         node * tmp=find(data);
@@ -127,7 +127,25 @@ public:
         current=tp;
     }
 
-    void print();
+    void print()
+    {
+        cout<<current->get_data()<<endl;
+
+        if(size==1)
+        {
+            return;
+        }
+        else
+        {
+            node * tmp=current->get_next();
+            while (tmp!=current)
+            {
+                cout<<tmp->get_data()<<endl;
+                tmp=tmp->get_next();
+            }
+        }
+    }
+
     node * find(int data)
     {
         node * tmp=current;
@@ -150,8 +168,9 @@ int main()
     c.push_befor(6,5);
     c.push_after(4,5);
     c.push(0);
+    c.pop(0) ;
 
-
+    c.print() ;
 
     return 0 ;
 }
