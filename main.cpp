@@ -95,7 +95,19 @@ public:
            size -- ;
         }
 
-    void pop(int data);
+    void pop(int data){
+        node * tmp=find(data);
+        if(tmp==this->current){
+            pop();
+            return ;
+        }
+        else{
+            node * tp=this->current;
+            this->current=tmp;
+            pop();
+            this->current=tp;
+        }
+    }
 
     void push_after(int new_data,int pa_data)
     {
@@ -115,25 +127,7 @@ public:
         current=tp;
     }
 
-    void print()
-    {
-        cout<<current->get_data()<<endl;
-
-        if(size==1)
-        {
-            return;
-        }
-        else
-        {
-            node * tmp=current->get_next();
-            while (tmp!=current)
-            {
-                cout<<tmp->get_data()<<endl;
-                tmp=tmp->get_next();
-            }
-        }
-    }
-
+    void print();
     node * find(int data)
     {
         node * tmp=current;
@@ -157,7 +151,7 @@ int main()
     c.push_after(4,5);
     c.push(0);
 
-    c.print();
+
 
     return 0 ;
 }
