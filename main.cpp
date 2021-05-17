@@ -52,7 +52,18 @@ public:
         current=nullptr;
     }
 
-    //  ~Circular_linked_list();
+    ~Circular_linked_list(){
+        if(this->size==1)
+            delete this->current;
+        else{
+            node * tmp=this->current->get_next();
+            while(tmp!=this->current){
+                delete tmp;
+                tmp=tmp->get_next();
+            }
+            delete this->current;
+        }
+    }
 
     void set_current(node * current)
     {
