@@ -52,18 +52,28 @@ public:
         current=nullptr;
     }
 
-    ~Circular_linked_list(){
-        if(this->size==1)
-            delete this->current;
-        else{
-            node * tmp=this->current->get_next();
-            while(tmp!=this->current){
-                delete tmp;
-                tmp=tmp->get_next();
+  ~Circular_linked_list(){
+            if(this->size<2)
+               {
+
+                delete this->current;
+                current=nullptr;
+                size=0;
+                return;
             }
-            delete this->current;
+            else{
+                node * tmp=this->current->get_next();
+                while(tmp!=this->current)
+                {
+                    node*tp=tmp;
+                    delete tp;
+                    tmp=tmp->get_next();
+                }
+                delete this->current;
+
+                //size=0;
+            }
         }
-    }
 
     void set_current(node * current)
     {
@@ -173,15 +183,6 @@ int main()
 {
     Circular_linked_list c;
 
-    c.push(7);
-    c.pop() ;
-    c.push(5);
-    c.push_befor(6,5);
-    c.push_after(4,5);
-    c.push(0);
-    c.pop(0) ;
-
-    c.print() ;
 
     return 0 ;
 }
